@@ -1,0 +1,44 @@
+{
+  "name": "postcss-alter-color",
+  "version": "0.0.1",
+  "description": "A PostCSS plugin to replace one color with another",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mistakster/postcss-alter-color.git"
+  },
+  "keywords": [
+    "postcss",
+    "color",
+    "replace",
+    "hex",
+    "rgb",
+    "rgba"
+  ],
+  "author": {
+    "name": "Vladimir Kuznetsov",
+    "email": "mistakster@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Anton Chernov",
+      "email": "anton940800@yandex.ru"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mistakster/postcss-alter-color/issues"
+  },
+  "homepage": "https://github.com/mistakster/postcss-alter-color#readme",
+  "dependencies": {
+    "css-tree": "^1.0.0-alpha.28",
+    "parse-color": "^1.0.0",
+    "postcss": "^6.0.21"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
+  }
+}
