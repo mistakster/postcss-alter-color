@@ -14,18 +14,21 @@ module.exports = postcss.plugin('alter-color', options => {
 	const initialColor = parseColor(options.from);
 	const finalColor = parseColor(options.to);
 
-	console.log(initialColor);
-	console.log(finalColor);
+	// console.log(initialColor);
+	// console.log(finalColor);
 
 	return (root, result) => {
 		root.walkRules(rule => {
 			rule.walkDecls(decl => {
 				if (canContainColor(decl.prop)) {
-					const parsedValue = cssTree.parse(decl.value, {context: 'value'});
+					// const parsedValue = cssTree.parse(decl.value, {context: 'value'});
+					// console.log(JSON.stringify(parsedValue));
+					// decl.value = cssTree.generate(parsedValue);
 
-					console.log(JSON.stringify(parsedValue));
+					if (decl.value === options.from) {
+						decl.value = options.to;
+					}
 
-					decl.value = cssTree.generate(parsedValue);
 				}
 			});
 		});
