@@ -23,14 +23,24 @@ module.exports = postcss.plugin('alter-color', options => {
 					const parsedValue = cssTree.parse(decl.value, {context: 'value'});
 					const typeData = parsedValue.children.head.data.type;
 					const typeName = parsedValue.children.head.data.name;
-					decl.value = cssTree.generate(parsedValue);
+					const typeValue = parsedValue.children.head.data.value;
 
 					switch(typeData) {
 						case 'Identifier':
 							decl.value = options.to;
 							break;
 						case 'HexColor':
-							decl.value = finalColor.hex;
+							if(typeValue.length < 4) {
+								const minHex = function a(b, c) {
+									return ++c ? (('0x' + b) / 17 + .5 | 0).toString(16) : b.replace(/../g, a);
+								};
+
+								const outColor = finalColor.hex.slice(1);
+
+								decl.value = `#${minHex(outColor)}`;
+							} else {
+								decl.value = finalColor.hex;
+							}
 							break;
 						case 'Function':
 							if(typeName === 'rgb') {
@@ -40,28 +50,8 @@ module.exports = postcss.plugin('alter-color', options => {
 							}
 							break;
 						default:
-							console.log(error);
+							console.log('Type of undefined');
 					}
-
-
-					console.log('decl.value', decl.value);
-					console.log('options.from', options.from);
-					console.log('options.to', options.to);
-					console.log('parsedValue', JSON.stringify(parsedValue));
-					// console.log('finalColor', finalColor);
-					console.log('========');
-
-
-
-					if(initialColor.keyword === options.from) {
-						finalColor.keyword = options.to;
-					}
-
-
-					// if (decl.value === options.from) {
-					// 	decl.value = options.to;
-					// }
-
 				}
 			});
 		});
