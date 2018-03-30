@@ -6,6 +6,28 @@ const alterColorPlugin = require('../index');
 
 const readFile = promisify(fs.readFile);
 
+const comparisonFiles = (inFilePath, OutFilePath, config) => {
+	const IN_FILE_PATH = path.join(__dirname, inFilePath);
+	const OUT_FILE_PATH = path.join(__dirname, OutFilePath);
+
+	return Promise
+		.all([
+			readFile(IN_FILE_PATH, 'utf-8'),
+			readFile(OUT_FILE_PATH, 'utf-8')
+		])
+		.then(([inFile, outFile]) => {
+			return postcss()
+				.use(alterColorPlugin(config)
+					.process(inFile, {from: IN_FILE_PATH, to: OUT_FILE_PATH})
+					.then(result => {
+						const output = result.css.toString();
+
+						expect(output).toBe(outFile);
+					})
+		)})
+
+};
+
 describe('Alter Color plugin', () => {
 
 	test('should alter simple colors', () => {
@@ -26,25 +48,37 @@ describe('Alter Color plugin', () => {
 			});
 	});
 
-	test.skip('should work', () => {
-		const IN_FILE_PATH = path.join(__dirname, './fixtures/in.css');
-		const OUT_FILE_PATH = path.join(__dirname, './fixtures/out.css');
-
-		return Promise
-			.all([
-				readFile(IN_FILE_PATH, 'utf-8'),
-				readFile(OUT_FILE_PATH, 'utf-8')
-			])
-			.then(([inFile, outFile]) => {
-				return postcss()
-					.use(alterColorPlugin({from: 'black', to: '#556832'}))
-					.process(inFile, {from: IN_FILE_PATH, to: OUT_FILE_PATH})
-					.then(result => {
-						const output = result.css.toString();
-
-						expect(output).toBe(outFile);
-					});
+	test('should alter hex full colors', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: 'red'}))
+			.process(`div{color:#000000}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:#ff0000}`)
 			});
+	});
+
+	test('should alter rgb colors', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: 'red'}))
+			.process(`div{color:rgb(0, 0, 0)}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:rgb(255,0,0)}`)
+			});
+	});
+
+	test('should alter rgba colors', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: 'red'}))
+			.process(`div{color:rgba(0,0,0,1)}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:rgba(255,0,0,1)}`)
+			});
+	});
+
+	test.skip('should work', () => {
+
+		comparisonFiles('./fixtures/in.css', './fixtures/out.css', {from: 'black', to: '#556832'});
+
 	});
 
 });
