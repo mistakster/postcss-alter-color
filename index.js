@@ -14,39 +14,41 @@ module.exports = postcss.plugin('alter-color', options => {
 	const initialColor = parseColor(options.from);
 	const finalColor = parseColor(options.to);
 
-	// console.log(finalColor);
-
 	return (root, result) => {
 		root.walkRules(rule => {
 			rule.walkDecls(decl => {
 				if (canContainColor(decl.prop)) {
 					const parsedValue = cssTree.parse(decl.value, {context: 'value'});
-					const typeData = parsedValue.children.head.data.type;
-					const typeName = parsedValue.children.head.data.name;
-					const typeValue = parsedValue.children.head.data.value;
+
+					cssTree.walk(parsedValue, {
+						visit: 'Identifier',
+						enter(node) {
+							if (node.name === initialColor.keyword) {
+								node.name = finalColor.keyword;
+							}
+						}
+					});
+
+					decl.value = cssTree.generate(parsedValue);
 
 
-					console.log(parsedValue.children.tail.data.value);
-					console.log(JSON.stringify(parsedValue.children));
-					console.log(options.from);
-					console.log(options.to);
-					console.log(decl.value);
+/*
 
+					if (checkIdentifier(type, parsedValue, initialColor)) {
+						decl.value = finalColor.keyword;
+					} else if (checkHexColor(type, parsedValue, initialColor)) {
+						decl.value = finalColor.hex;
+					}
+
+*/
+
+
+/*
 					switch(typeData) {
 						case 'Identifier':
 							decl.value = options.to;
 							break;
 						case 'HexColor':
-							if(typeValue.length < 4) {
-								const minHex = function a(b, c) {
-									return ++c ? (('0x' + b) / 17 + .5 | 0).toString(16) : b.replace(/../g, a);
-								};
-								const outColor = finalColor.hex.slice(1);
-
-								decl.value = `#${minHex(outColor)}`;
-							} else {
-								decl.value = finalColor.hex;
-							}
 							break;
 						case 'Function':
 							if(typeName === 'rgb') {
@@ -60,6 +62,7 @@ module.exports = postcss.plugin('alter-color', options => {
 					}
 
 					console.log(decl.value);
+*/
 				}
 			});
 		});
