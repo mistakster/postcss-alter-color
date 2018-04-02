@@ -6,6 +6,16 @@ function canContainColor(prop) {
 	return true;
 }
 
+function removeHashSymbol(hexValue) {
+	return hexValue.substring(1);
+}
+
+// "012345" => "024"
+// "123456" => "135"
+function convertToShortHex(hexValue) {
+	return `${hexValue[0]}${hexValue[2]}${hexValue[4]}`;
+}
+
 module.exports = postcss.plugin('alter-color', options => {
 	if (!options || !options.from || !options.to) {
 		throw new Error('Required options is missing');
@@ -25,6 +35,21 @@ module.exports = postcss.plugin('alter-color', options => {
 						enter(node) {
 							if (node.name === initialColor.keyword) {
 								node.name = finalColor.keyword;
+							}
+						}
+					});
+
+					cssTree.walk(parsedValue, {
+						visit: 'HexColor',
+						enter(node) {
+							if(node.value.length > 3) {
+								if (node.value === removeHashSymbol(initialColor.hex)) {
+									node.value = removeHashSymbol(finalColor.hex);
+								}
+							} else {
+								if (node.value === convertToShortHex(removeHashSymbol(initialColor.hex))) {
+									node.value = convertToShortHex(removeHashSymbol(finalColor.hex));
+								}
 							}
 						}
 					});
