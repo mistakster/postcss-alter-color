@@ -10,8 +10,6 @@ function removeHashSymbol(hexValue) {
 	return hexValue.substring(1);
 }
 
-// "012345" => "024"
-// "123456" => "135"
 function convertToShortHex(hexValue) {
 	return `${hexValue[0]}${hexValue[2]}${hexValue[4]}`;
 }
@@ -42,7 +40,7 @@ module.exports = postcss.plugin('alter-color', options => {
 					cssTree.walk(parsedValue, {
 						visit: 'HexColor',
 						enter(node) {
-							if(node.value.length > 3) {
+							if (node.value.length > 3) {
 								if (node.value === removeHashSymbol(initialColor.hex)) {
 									node.value = removeHashSymbol(finalColor.hex);
 								}
@@ -54,40 +52,56 @@ module.exports = postcss.plugin('alter-color', options => {
 						}
 					});
 
-					decl.value = cssTree.generate(parsedValue);
+					cssTree.walk(parsedValue, {
+						visit: 'Function',
+						enter(node) {
 
+							const ast = cssTree.toPlainObject(cssTree.clone(node));
 
-/*
+							if(node.name === 'rgb') {
 
-					if (checkIdentifier(type, parsedValue, initialColor)) {
-						decl.value = finalColor.keyword;
-					} else if (checkHexColor(type, parsedValue, initialColor)) {
-						decl.value = finalColor.hex;
-					}
+								ast.children.map((item, index) => {
+									if(index === 0) {
+										item.value = finalColor.rgb[0].toString();
+									}
 
-*/
+									if(index === 2) {
+										item.value = finalColor.rgb[1].toString();
+									}
 
+									if(index === 4) {
+										item.value = finalColor.rgb[2].toString();
+									}
 
-/*
-					switch(typeData) {
-						case 'Identifier':
-							decl.value = options.to;
-							break;
-						case 'HexColor':
-							break;
-						case 'Function':
-							if(typeName === 'rgb') {
-								decl.value = `rgb(${finalColor.rgb})`;
-							} else if (typeName === 'rgba') {
-								decl.value = `rgba(${finalColor.rgba})`;
+									return false;
+								});
+							} else if (node.name === 'rgba') {
+								ast.children.map((item, index) => {
+									if(index === 0) {
+										item.value = finalColor.rgba[0].toString();
+									}
+
+									if(index === 2) {
+										item.value = finalColor.rgba[1].toString();
+									}
+
+									if(index === 4) {
+										item.value = finalColor.rgba[2].toString();
+									}
+
+									if (index === 6) {
+										item.value = finalColor.rgba[3].toString();
+									}
+
+									return false;
+								});
 							}
-							break;
-						default:
-							console.log('Type of undefined');
-					}
 
-					console.log(decl.value);
-*/
+							node = cssTree.fromPlainObject(cssTree.clone(ast));
+						}
+					});
+
+					decl.value = cssTree.generate(parsedValue);
 				}
 			});
 		});
