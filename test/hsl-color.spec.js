@@ -1,0 +1,24 @@
+const postcss = require('postcss');
+const alterColorPlugin = require('../index');
+
+describe('Alter Color plugin', () => {
+
+	test('should alter hsl colors', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: 'red'}))
+			.process(`div{color:hsl(0,0,0)}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:hsl(0,100,50)}`)
+			});
+	});
+
+	test('should alter hsl color in a complex value', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: 'red'}))
+			.process(`div{color:hsl(0,0,0);border:1px solid hsl(255,255,255);outline:1px solid hsl(0,0,0)}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:hsl(0,100,50);border:1px solid hsl(255,255,255);outline:1px solid hsl(0,100,50)}`)
+			});
+	});
+
+});
