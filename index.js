@@ -58,43 +58,52 @@ module.exports = postcss.plugin('alter-color', options => {
 
 							const ast = cssTree.toPlainObject(node);
 
+							const colorGenerate = ast.children.reduce((acc, item) => {
+								return acc += item.value;
+							}, []);
+
 							if(node.name === 'rgb') {
 
-								ast.children.map((item, index) => {
-									if(index === 0) {
-										item.value = finalColor.rgb[0].toString();
-									}
+								if(colorGenerate === initialColor.rgb.toString()) {
+									ast.children.map((item, index) => {
 
-									if(index === 2) {
-										item.value = finalColor.rgb[1].toString();
-									}
+										if(index === 0) {
+											item.value = finalColor.rgb[0].toString();
+										}
 
-									if(index === 4) {
-										item.value = finalColor.rgb[2].toString();
-									}
+										if(index === 2) {
+											item.value = finalColor.rgb[1].toString();
+										}
 
-									return false;
-								});
+										if(index === 4) {
+											item.value = finalColor.rgb[2].toString();
+										}
+
+										return false;
+									});
+								}
 							} else if (node.name === 'rgba') {
-								ast.children.map((item, index) => {
-									if(index === 0) {
-										item.value = finalColor.rgba[0].toString();
-									}
+								if(colorGenerate === initialColor.rgba.toString()) {
+									ast.children.map((item, index) => {
+										if (index === 0) {
+											item.value = finalColor.rgba[0].toString();
+										}
 
-									if(index === 2) {
-										item.value = finalColor.rgba[1].toString();
-									}
+										if (index === 2) {
+											item.value = finalColor.rgba[1].toString();
+										}
 
-									if(index === 4) {
-										item.value = finalColor.rgba[2].toString();
-									}
+										if (index === 4) {
+											item.value = finalColor.rgba[2].toString();
+										}
 
-									if (index === 6) {
-										item.value = finalColor.rgba[3].toString();
-									}
+										if (index === 6) {
+											item.value = finalColor.rgba[3].toString();
+										}
 
-									return false;
-								});
+										return false;
+									});
+								}
 							}
 
 							return cssTree.fromPlainObject(cssTree.clone(ast));

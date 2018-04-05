@@ -12,7 +12,7 @@ describe('Alter Color plugin', () => {
 			});
 	});
 
-	test.skip('should alter rgb color in a complex value', () => {
+	test('should alter rgb color in a complex value', () => {
 		return postcss()
 			.use(alterColorPlugin({from: 'black', to: 'red'}))
 			.process(`div{color:rgb(0,0,0);border:1px solid rgb(255,255,255);outline:1px solid rgb(0,0,0)}`, {from: undefined})
