@@ -56,7 +56,7 @@ module.exports = postcss.plugin('alter-color', options => {
 						visit: 'Function',
 						enter(node) {
 
-							const ast = cssTree.toPlainObject(cssTree.clone(node));
+							const ast = cssTree.toPlainObject(node);
 
 							if(node.name === 'rgb') {
 
@@ -97,7 +97,7 @@ module.exports = postcss.plugin('alter-color', options => {
 								});
 							}
 
-							node = cssTree.fromPlainObject(cssTree.clone(ast));
+							return cssTree.fromPlainObject(cssTree.clone(ast));
 						}
 					});
 
