@@ -33,6 +33,10 @@
     "url": "https://github.com/mistakster/postcss-alter-color/issues"
   },
   "homepage": "https://github.com/mistakster/postcss-alter-color#readme",
+  "engines": {
+    "node": ">=6",
+    "npm": "^3.0.0"
+  },
   "dependencies": {
     "css-tree": "^1.0.0-alpha.28",
     "parse-color": "^1.0.0",
