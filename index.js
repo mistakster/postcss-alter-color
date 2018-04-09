@@ -14,33 +14,19 @@ function convertToShortHex(hexValue) {
 	return `${hexValue[0]}${hexValue[2]}${hexValue[4]}`;
 }
 
-function addPercent(finalColorElement) {
-	return `${finalColorElement}%`;
+function isColorEqual(nodeColor, targetColor) {
+	return nodeColor
+		.every((c, i) => parseFloat(c.value) === targetColor[i]);
 }
 
-function arrayEqual(a, b) {
-	return !a.find(item => b.indexOf(item) === -1);
-}
+function applyColorFunction(node, initialColor, finalColor) {
+	const {name} = node;
+	const nodeColor = node.children
+		.filter(item => item.type === 'Number' || item.type === 'Percentage')
+		.toArray();
 
-function changingColorFunction(color, checkedColor, initialColor, finalColor, nameFuncColor) {
-	if (arrayEqual(checkedColor, initialColor)) {
-		color.children
-			.filter(item => item.type === 'Number' || item.type === 'Percentage')
-			.forEach((item, index) => {
-
-				if (nameFuncColor === 'hsl' || nameFuncColor === 'hsla') {
-
-					if(index > 2 && index < 3) {
-						return item.value = addPercent(finalColor[index]);
-					} else {
-						return item.value = finalColor[index];
-					}
-
-				} else {
-					return item.value = finalColor[index];
-				}
-
-			});
+	if(isColorEqual(nodeColor, initialColor[name])) {
+		nodeColor.forEach((c, i) => c.value = finalColor[name][i]);
 	}
 }
 
@@ -60,13 +46,9 @@ module.exports = postcss.plugin('alter-color', options => {
 
 					cssTree.walk(parsedValue, {
 						visit: 'Identifier',
-						enter(node) {
+						enter: function (node) {
 							if (node.name === initialColor.keyword) {
-								if (finalColor.keyword === undefined) {
-									node.name = finalColor.hex;
-								} else {
-									node.name = finalColor.keyword;
-								}
+								node.name = finalColor.keyword ? finalColor.keyword : finalColor.hex;
 							}
 						}
 					});
@@ -91,27 +73,7 @@ module.exports = postcss.plugin('alter-color', options => {
 					cssTree.walk(parsedValue, {
 						visit: 'Function',
 						enter(node) {
-
-							cssTree.toPlainObject(node);
-
-							const checkedColor = node.children
-								.filter(item => item.type === 'Number' || item.type === 'Percentage')
-								.map(item => +item.value);
-
-							switch (node.name) {
-								case 'rgb':
-									changingColorFunction(node, checkedColor, initialColor.rgb, finalColor.rgb);
-									break;
-								case 'rgba':
-									changingColorFunction(node, checkedColor, initialColor.rgba, finalColor.rgba);
-									break;
-								case 'hsl':
-									changingColorFunction(node, checkedColor, initialColor.hsl, finalColor.hsl, 'hsl');
-									break;
-								case 'hsla':
-									changingColorFunction(node, checkedColor, initialColor.hsla, finalColor.hsla, 'hsla');
-									break;
-							}
+							applyColorFunction(node, initialColor, finalColor);
 						}
 					});
 
