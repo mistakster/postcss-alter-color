@@ -12,6 +12,15 @@ describe('Alter Color plugin', () => {
 			});
 	});
 
+	test('should alter short hex to full hex colors', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: '#ff3fe0'}))
+			.process(`div{color:#000}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:#ff3fe0}`)
+			});
+	});
+
 	test('should alter short hex color in a complex value', () => {
 		return postcss()
 			.use(alterColorPlugin({from: 'black', to: 'red'}))

@@ -79,7 +79,9 @@ module.exports = postcss.plugin('alter-color', options => {
 									node.value = removeHashSymbol(finalColor.hex);
 								}
 							} else {
-								if (node.value === convertToShortHex(removeHashSymbol(initialColor.hex))) {
+								if (options.to.length > 3) {
+									node.value = removeHashSymbol(finalColor.hex);
+								} else if (node.value === convertToShortHex(removeHashSymbol(initialColor.hex))) {
 									node.value = convertToShortHex(removeHashSymbol(finalColor.hex));
 								}
 							}
