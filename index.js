@@ -14,11 +14,33 @@ function convertToShortHex(hexValue) {
 	return `${hexValue[0]}${hexValue[2]}${hexValue[4]}`;
 }
 
-function changingColorFunction(color, checkedColor, initialColor, finalColor) {
-	if (checkedColor === initialColor.toString()) {
+function addPercent(finalColorElement) {
+	return `${finalColorElement}%`;
+}
+
+function arrayEqual(a, b) {
+	return !a.find(item => b.indexOf(item) === -1);
+}
+
+function changingColorFunction(color, checkedColor, initialColor, finalColor, nameFuncColor) {
+	if (arrayEqual(checkedColor, initialColor)) {
 		color.children
-			.filter(item => item.type === 'Number')
-			.forEach((item, index) => item.value = finalColor[index]);
+			.filter(item => item.type === 'Number' || item.type === 'Percentage')
+			.forEach((item, index) => {
+
+				if (nameFuncColor === 'hsl' || nameFuncColor === 'hsla') {
+
+					if(index > 2 && index < 3) {
+						return item.value = addPercent(finalColor[index]);
+					} else {
+						return item.value = finalColor[index];
+					}
+
+				} else {
+					return item.value = finalColor[index];
+				}
+
+			});
 	}
 }
 
@@ -68,36 +90,24 @@ module.exports = postcss.plugin('alter-color', options => {
 						visit: 'Function',
 						enter(node) {
 
-							const ast = cssTree.toPlainObject(node);
+							cssTree.toPlainObject(node);
 
-							const checkedColor = ast.children.reduce((color, item) => {
-								return color += item.value;
-							}, '');
+							const checkedColor = node.children
+								.filter(item => item.type === 'Number' || item.type === 'Percentage')
+								.map(item => +item.value);
 
 							switch (node.name) {
 								case 'rgb':
-									changingColorFunction(ast, checkedColor, initialColor.rgb, finalColor.rgb);
+									changingColorFunction(node, checkedColor, initialColor.rgb, finalColor.rgb);
 									break;
 								case 'rgba':
-									changingColorFunction(ast, checkedColor, initialColor.rgba, finalColor.rgba);
+									changingColorFunction(node, checkedColor, initialColor.rgba, finalColor.rgba);
 									break;
 								case 'hsl':
-									changingColorFunction(ast, checkedColor, initialColor.hsl, finalColor.hsl);
+									changingColorFunction(node, checkedColor, initialColor.hsl, finalColor.hsl, 'hsl');
 									break;
 								case 'hsla':
-									changingColorFunction(ast, checkedColor, initialColor.hsla, finalColor.hsla);
-									break;
-								case 'hsv':
-									changingColorFunction(ast, checkedColor, initialColor.hsv, finalColor.hsv);
-									break;
-								case 'hsva':
-									changingColorFunction(ast, checkedColor, initialColor.hsva, finalColor.hsva);
-									break;
-								case 'cmyk':
-									changingColorFunction(ast, checkedColor, initialColor.cmyk, finalColor.cmyk);
-									break;
-								case 'cmyka':
-									changingColorFunction(ast, checkedColor, initialColor.cmyka, finalColor.cmyka);
+									changingColorFunction(node, checkedColor, initialColor.hsla, finalColor.hsla, 'hsla');
 									break;
 							}
 						}
