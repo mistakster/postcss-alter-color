@@ -39,12 +39,21 @@ describe('Alter Color plugin', () => {
 			});
 	});
 
-	test('should alter simple color change to hex color a single property', () => {
+	test('should alter simple color to hex color a single property', () => {
 		return postcss()
 			.use(alterColorPlugin({from: 'black', to: '#fffeee'}))
-			.process(`div{color:black;}`, {from: undefined})
+			.process(`div{color:black}`, {from: undefined})
 			.then(result => {
-				expect(result.css).toBe(`div{color:#fffeee;}`)
+				expect(result.css).toBe(`div{color:#fffeee}`)
+			});
+	});
+
+	test('should alter simple color to short hex color a single property', () => {
+		return postcss()
+			.use(alterColorPlugin({from: 'black', to: '#79b'}))
+			.process(`div{color:black}`, {from: undefined})
+			.then(result => {
+				expect(result.css).toBe(`div{color:#79b}`)
 			});
 	});
 });
