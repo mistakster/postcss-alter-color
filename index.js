@@ -42,7 +42,7 @@ module.exports = postcss.plugin('alter-color', options => {
         cssTree.walk(parsedValue, {
           visit: 'Identifier',
           enter: function (node) {
-            if (node.name === initialColor.keyword) {
+            if (initialColor.keyword && initialColor.keyword === node.name) {
               node.name = finalColor.keyword ? finalColor.keyword : finalColor.hex;
             }
           }
