@@ -2,7 +2,7 @@
   "name": "postcss-alter-color",
   "version": "0.0.1",
   "description": "A PostCSS plugin to replace one color with another",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest"
   },

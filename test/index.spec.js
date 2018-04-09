@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const {promisify} = require('util');
 const postcss = require('postcss');
-const alterColorPlugin = require('../index');
+const alterColorPlugin = require('../lib/index');
 
 const readFile = promisify(fs.readFile);
 
