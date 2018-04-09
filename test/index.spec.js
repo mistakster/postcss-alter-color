@@ -6,27 +6,36 @@ const alterColorPlugin = require('../index');
 
 const readFile = promisify(fs.readFile);
 
-describe('', () => {
+function compareFiles(inFilePath, OutFilePath, config) {
+	const IN_FILE_PATH = path.join(__dirname, inFilePath);
+	const OUT_FILE_PATH = path.join(__dirname, OutFilePath);
 
-	test('should work', () => {
-		const IN_FILE_PATH = path.join(__dirname, './fixtures/in.css');
-		const OUT_FILE_PATH = path.join(__dirname, './fixtures/out.css');
+	return Promise
+		.all([
+			readFile(IN_FILE_PATH, 'utf-8'),
+			readFile(OUT_FILE_PATH, 'utf-8')
+		])
+		.then(([inFile, outFile]) => {
+			return postcss()
+				.use(alterColorPlugin(config))
+				.process(inFile, {from: IN_FILE_PATH, to: OUT_FILE_PATH})
+				.then(result => {
+					const output = result.css.toString();
 
-		return Promise
-			.all([
-				readFile(IN_FILE_PATH, 'utf-8'),
-				readFile(OUT_FILE_PATH, 'utf-8')
-			])
-			.then(([inFile, outFile]) => {
-				return postcss()
-					.use(alterColorPlugin({from: 'black', to: '#556832'}))
-					.process(inFile, {from: IN_FILE_PATH, to: OUT_FILE_PATH})
-					.then(result => {
-						const output = result.css.toString();
+					expect(output).toBe(outFile);
+				})
+		})
 
-						expect(output).toBe(outFile);
-					});
-			});
+}
+
+describe('Alter Color plugin', () => {
+
+	test.skip('should process a complex file correctly', () => {
+		compareFiles(
+			'./fixtures/in.css',
+			'./fixtures/out.css',
+			{from: 'black', to: '#556832'}
+		);
 	});
 
 });
