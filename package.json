@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A PostCSS plugin to replace one color with another",
   "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
     "test": "jest"
   },
