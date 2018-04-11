@@ -19,14 +19,22 @@ function isColorEqual(nodeColor, targetColor) {
     .every((c, i) => parseFloat(c.value) === targetColor[i]);
 }
 
-function applyColorFunction(node, initialColor, finalColor) {
+function applyColorFunction(node, initialColor, finalColor, alphaChannel) {
   const {name} = node;
   const nodeColor = node.children
     .filter(item => item.type === 'Number' || item.type === 'Percentage')
     .toArray();
 
+  const cloneNodeColor = [...nodeColor];
+  const sliceNodeColor = cloneNodeColor.slice(0, 3);
+  const sliceInitialColor = initialColor[name].slice(0, 3);
+
   if (isColorEqual(nodeColor, initialColor[name])) {
     nodeColor.forEach((c, i) => c.value = finalColor[name][i]);
+  } else if(alphaChannel && isColorEqual(sliceNodeColor, sliceInitialColor)) {
+    nodeColor.forEach((c, i, a) => {
+      if(a[a.length - 1] !== c) c.value = finalColor[name][i];
+    });
   }
 }
 
@@ -37,6 +45,7 @@ module.exports = postcss.plugin('alter-color', options => {
 
   const initialColor = parseColor(options.from);
   const finalColor = parseColor(options.to);
+  const alphaChannel = options.alphaChannel;
 
   return (root) => {
     root.walkRules(rule => {
@@ -73,7 +82,7 @@ module.exports = postcss.plugin('alter-color', options => {
           cssTree.walk(parsedValue, {
             visit: 'Function',
             enter(node) {
-              applyColorFunction(node, initialColor, finalColor);
+              applyColorFunction(node, initialColor, finalColor, alphaChannel);
             }
           });
 
