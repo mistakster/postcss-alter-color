@@ -29,7 +29,7 @@ function applyColorFunction(node, initialColor, finalColor, alphaChannel) {
   const sliceNodeColor = cloneNodeColor.slice(0, 3);
   const sliceInitialColor = initialColor[name].slice(0, 3);
 
-  if (isColorEqual(nodeColor, initialColor[name])) {
+  if (!alphaChannel && isColorEqual(nodeColor, initialColor[name])) {
     nodeColor.forEach((c, i) => c.value = finalColor[name][i]);
   } else if(alphaChannel && isColorEqual(sliceNodeColor, sliceInitialColor)) {
     nodeColor.forEach((c, i, a) => {
