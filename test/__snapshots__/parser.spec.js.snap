@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Color parser should parse hex colors 1`] = `
+Object {
+  "hex": "9932cc",
+  "hsl": Array [
+    280,
+    61,
+    50,
+  ],
+  "hsla": Array [
+    280,
+    61,
+    50,
+    1,
+  ],
+  "keyword": "darkorchid",
+  "rgb": Array [
+    153,
+    50,
+    204,
+  ],
+  "rgba": Array [
+    153,
+    50,
+    204,
+    1,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse hsl() colors 1`] = `
+Object {
+  "hex": "768798",
+  "hsl": Array [
+    210,
+    14,
+    53,
+  ],
+  "hsla": Array [
+    210,
+    14,
+    53,
+    1,
+  ],
+  "keyword": undefined,
+  "rgb": Array [
+    118,
+    135,
+    152,
+  ],
+  "rgba": Array [
+    118,
+    135,
+    152,
+    1,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse hsla() colors 1`] = `
+Object {
+  "hex": "9932cd",
+  "hsl": Array [
+    280,
+    61,
+    50,
+  ],
+  "hsla": Array [
+    280,
+    61,
+    50,
+    0.4,
+  ],
+  "keyword": undefined,
+  "rgb": Array [
+    153,
+    50,
+    205,
+  ],
+  "rgba": Array [
+    153,
+    50,
+    205,
+    0.4,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse keywords 1`] = `
+Object {
+  "hex": "add8e6",
+  "hsl": Array [
+    195,
+    53,
+    79,
+  ],
+  "hsla": Array [
+    195,
+    53,
+    79,
+    1,
+  ],
+  "keyword": "lightblue",
+  "rgb": Array [
+    173,
+    216,
+    230,
+  ],
+  "rgba": Array [
+    173,
+    216,
+    230,
+    1,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse rgb() colors 1`] = `
+Object {
+  "hex": "dc143c",
+  "hsl": Array [
+    348,
+    83,
+    47,
+  ],
+  "hsla": Array [
+    348,
+    83,
+    47,
+    1,
+  ],
+  "keyword": "crimson",
+  "rgb": Array [
+    220,
+    20,
+    60,
+  ],
+  "rgba": Array [
+    220,
+    20,
+    60,
+    1,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse rgba() colors 1`] = `
+Object {
+  "hex": "dc143c",
+  "hsl": Array [
+    348,
+    83,
+    47,
+  ],
+  "hsla": Array [
+    348,
+    83,
+    47,
+    0.5,
+  ],
+  "keyword": "crimson",
+  "rgb": Array [
+    220,
+    20,
+    60,
+  ],
+  "rgba": Array [
+    220,
+    20,
+    60,
+    0.5,
+  ],
+  "shortHex": undefined,
+}
+`;
+
+exports[`Color parser should parse short hex colors 1`] = `
+Object {
+  "hex": "778899",
+  "hsl": Array [
+    210,
+    14,
+    53,
+  ],
+  "hsla": Array [
+    210,
+    14,
+    53,
+    1,
+  ],
+  "keyword": "lightslategrey",
+  "rgb": Array [
+    119,
+    136,
+    153,
+  ],
+  "rgba": Array [
+    119,
+    136,
+    153,
+    1,
+  ],
+  "shortHex": "789",
+}
+`;
