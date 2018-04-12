@@ -1,5 +1,5 @@
 const postcss = require('postcss');
-const alterColorPlugin = require('../index');
+const alterColorPlugin = require('../lib/index');
 
 describe('Alter Color plugin', () => {
 
