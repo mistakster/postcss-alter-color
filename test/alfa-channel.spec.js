@@ -1,32 +1,28 @@
-const postcss = require('postcss');
-const alterColorPlugin = require('../lib/index');
+const setup = require('./utils/setup');
 
-describe('Alter Color plugin', () => {
+it('should alter a color and leave alpha channel untouched', () => {
+  const options = {from: 'black', to: 'red', preserveAlphaChannel: true};
+  const source = 'div{color:rgba(0,0,0,0.5)}';
+  const result = 'div{color:rgba(255,0,0,0.5)}';
 
-  test('should alter simple color alpha channel in a single property', () => {
-    return postcss()
-      .use(alterColorPlugin({from: 'black', to: 'red', preserveAlphaChannel: true}))
-      .process(`div{color:rgba(0,0,0,0.5)}`, {from: undefined})
-      .then(result => {
-        expect(result.css).toBe(`div{color:rgba(255,0,0,0.5)}`)
-      });
-  });
+  return setup(source, options)
+    .then(css => expect(css).toBe(result));
+});
 
-  test('should alter simple color without alpha channel in a single property', () => {
-    return postcss()
-      .use(alterColorPlugin({from: 'black', to: 'red'}))
-      .process(`div{color:rgba(0,0,0,0.5)}`, {from: undefined})
-      .then(result => {
-        expect(result.css).toBe(`div{color:rgba(0,0,0,0.5)}`)
-      });
-  });
+it('should not alter a color with different alpha channel', () => {
+  const options = {from: 'black', to: 'red'};
+  const source = 'div{color:rgba(0,0,0,0.5)}';
+  const result = 'div{color:rgba(0,0,0,0.5)}';
 
-  test('should alter simple color alpha channel in a single property', () => {
-    return postcss()
-      .use(alterColorPlugin({from: 'black', to: 'red', preserveAlphaChannel: true}))
-      .process(`div{color:rgba(0,0,0,0.5);outline:1px solid hsla(0,0%,0%,0.9);border:solid 1px rgb(0,0,0)}`, {from: undefined})
-      .then(result => {
-        expect(result.css).toBe(`div{color:rgba(255,0,0,0.5);outline:1px solid hsla(0,100%,50%,0.9);border:solid 1px rgb(255,0,0)}`)
-      });
-  });
+  return setup(source, options)
+    .then(css => expect(css).toBe(result));
+});
+
+it('should alter both rgb(), rgba(), hsl() and hsla() colors', () => {
+  const options = {from: 'black', to: 'red', preserveAlphaChannel: true};
+  const source = 'div{border:solid 1px rgb(0,0,0);color:rgba(0,0,0,0.5);background-color:hsl(0,0%,0%);outline:1px solid hsla(0,0%,0%,0.9)}';
+  const result = 'div{border:solid 1px rgb(255,0,0);color:rgba(255,0,0,0.5);background-color:hsl(0,100%,50%);outline:1px solid hsla(0,100%,50%,0.9)}';
+
+  return setup(source, options)
+    .then(css => expect(css).toBe(result));
 });
