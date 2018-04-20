@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should alter hsla color and opacity in a complex value 1`] = `
+"
+div {
+  color: hsla(0,0%,0%,0.5);
+  border: 1px solid hsla(0,0%,100%,1);
+  outline: 1px solid hsla(0,100%,50%,1);
+}
+"
+`;
+
+exports[`should alter hsla color in a complex value 1`] = `
+"
+div {
+  color: hsla(0,100%,50%,1);
+  border: 1px solid hsla(0,0%,100%,1);
+  outline: 1px solid hsla(0,100%,50%,1);
+}
+"
+`;
+
+exports[`should alter hsla colors 1`] = `
+"
+div {
+  color: hsla(0,100%,50%,1);
+}
+"
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should alter hsl color in a complex value 1`] = `
+"
+div {
+  color: hsl(0,100%,50%);
+  border: 1px solid hsl(0,0%,100%);
+  outline: 1px solid hsl(0,100%,50%);
+}
+"
+`;
+
+exports[`should alter hsl colors 1`] = `
+"
+div {
+  color: hsl(0,100%,50%);
+}
+"
+`;
