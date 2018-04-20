@@ -11,5 +11,5 @@ module.exports = function (css, options) {
   return postcss()
     .use(alterColorPlugin(options))
     .process(css, {from: undefined})
-    .then(result => result.css);
+    .then(result => result.css.toString());
 };
