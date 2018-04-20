@@ -2,6 +2,7 @@
 
 exports[`Color parser should parse hex colors 1`] = `
 Object {
+  "colorFormat": "hex",
   "hex": "9932cc",
   "hsl": Array [
     280,
@@ -32,6 +33,7 @@ Object {
 
 exports[`Color parser should parse hsl() colors 1`] = `
 Object {
+  "colorFormat": "hsl",
   "hex": "768798",
   "hsl": Array [
     210,
@@ -62,6 +64,7 @@ Object {
 
 exports[`Color parser should parse hsla() colors 1`] = `
 Object {
+  "colorFormat": "hsla",
   "hex": "9932cd",
   "hsl": Array [
     280,
@@ -92,6 +95,7 @@ Object {
 
 exports[`Color parser should parse keywords 1`] = `
 Object {
+  "colorFormat": "keyword",
   "hex": "add8e6",
   "hsl": Array [
     195,
@@ -122,6 +126,7 @@ Object {
 
 exports[`Color parser should parse rgb() colors 1`] = `
 Object {
+  "colorFormat": "rgb",
   "hex": "dc143c",
   "hsl": Array [
     348,
@@ -152,6 +157,7 @@ Object {
 
 exports[`Color parser should parse rgba() colors 1`] = `
 Object {
+  "colorFormat": "rgba",
   "hex": "dc143c",
   "hsl": Array [
     348,
@@ -182,6 +188,7 @@ Object {
 
 exports[`Color parser should parse short hex colors 1`] = `
 Object {
+  "colorFormat": "hex",
   "hex": "778899",
   "hsl": Array [
     210,
