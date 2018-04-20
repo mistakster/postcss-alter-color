@@ -45,10 +45,26 @@ div {
 "
 `;
 
+exports[`should replace a color keyword with hsla() function 1`] = `
+"
+div {
+  color: hsla(30,67%,17%,0.5);
+}
+"
+`;
+
 exports[`should replace a color keyword with rgb() function 1`] = `
 "
 div {
   color: rgb(55,55,55);
+}
+"
+`;
+
+exports[`should replace a color keyword with rgba() function 1`] = `
+"
+div {
+  color: rgba(55,55,55,0.5);
 }
 "
 `;

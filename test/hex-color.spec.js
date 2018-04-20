@@ -80,6 +80,17 @@ div {
     .andMatchSnapshot();
 });
 
+it('should replace a hex color with rgba() function', () => {
+  const source = `
+div {
+  color: #000;
+}
+`;
+
+  return process(source, {from: 'black', to: 'rgba(55,55,55,0.5)'})
+    .andMatchSnapshot();
+});
+
 it('should replace a hex color with hsl() function', () => {
   const source = `
 div {
@@ -88,6 +99,17 @@ div {
 `;
 
   return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
+    .andMatchSnapshot();
+});
+
+it('should replace a hex color with hsla() function', () => {
+  const source = `
+div {
+  color: #000;
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsla(30,67%,17%,0.5)'})
     .andMatchSnapshot();
 });
 

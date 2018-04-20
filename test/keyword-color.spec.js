@@ -44,6 +44,17 @@ div {
     .andMatchSnapshot();
 });
 
+it('should replace a color keyword with rgba() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'rgba(55,55,55,0.5)'})
+    .andMatchSnapshot();
+});
+
 it('should replace a color keyword with hsl() function', () => {
   const source = `
 div {
@@ -52,6 +63,17 @@ div {
 `;
 
   return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
+    .andMatchSnapshot();
+});
+
+it('should replace a color keyword with hsla() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsla(30,67%,17%,0.5)'})
     .andMatchSnapshot();
 });
 
