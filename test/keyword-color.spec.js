@@ -1,4 +1,4 @@
-const setup = require('./utils/setup');
+const process = require('./utils/process');
 
 it('should alter simple color in a single property', () => {
   const source = `
@@ -7,8 +7,8 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: 'red'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: 'red'})
+    .andMatchSnapshot();
 });
 
 it('should alter simple color in a single property and don’t touch others', () => {
@@ -21,8 +21,8 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: 'red'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: 'red'})
+    .andMatchSnapshot();
 });
 
 it('should alter color in a complex value', () => {
@@ -34,8 +34,8 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: 'red'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: 'red'})
+    .andMatchSnapshot();
 });
 
 it('should alter simple color in multiple properties', () => {
@@ -46,8 +46,8 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: 'red'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: 'red'})
+    .andMatchSnapshot();
 });
 
 it('should alter simple color to hex color a single property', () => {
@@ -57,8 +57,8 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: '#fffeee'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: '#fffeee'})
+    .andMatchSnapshot();
 });
 
 it('should alter simple color to short hex color a single property', () => {
@@ -68,6 +68,6 @@ div {
 }
 `;
 
-  return setup(source, {from: 'black', to: '#79b'})
-    .then(css => expect(css).toMatchSnapshot());
+  return process(source, {from: 'black', to: '#79b'})
+    .andMatchSnapshot();
 });

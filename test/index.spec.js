@@ -1,6 +1,4 @@
-const postcss = require('postcss');
-const alterColorPlugin = require('../lib/index');
-const setup = require('./utils/setup');
+const process = require('./utils/process');
 
 const source = `
 body {
@@ -40,8 +38,8 @@ describe('Alter Color plugin', () => {
       preserveAlphaChannel: false
     };
 
-    return setup(source, options)
-      .then(css => expect(css).toMatchSnapshot());
+    return process(source, options)
+      .andMatchSnapshot();
   });
 
   it('should process a complex file correctly while preserving alpha channel', () => {
@@ -51,7 +49,7 @@ describe('Alter Color plugin', () => {
       preserveAlphaChannel: true
     };
 
-    return setup(source, options)
-      .then(css => expect(css).toMatchSnapshot());
+    return process(source, options)
+      .andMatchSnapshot();
   });
 });
