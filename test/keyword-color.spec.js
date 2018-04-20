@@ -1,6 +1,6 @@
 const process = require('./utils/process');
 
-it('should alter simple color in a single property', () => {
+it('should alter a color keyword in a single property', () => {
   const source = `
 div {
   color: black
@@ -11,7 +11,51 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter simple color in a single property and don’t touch others', () => {
+it('should replace a color keyword with hex color', () => {
+  const source =`
+div {
+  color: black
+}
+`;
+
+  return process(source, {from: 'black', to: '#fffeee'})
+    .andMatchSnapshot();
+});
+
+it('should replace a color keyword with short hex color', () => {
+  const source = `
+div {
+  color: black
+}
+`;
+
+  return process(source, {from: 'black', to: '#79b'})
+    .andMatchSnapshot();
+});
+
+it('should replace a color keyword with rgb() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'rgb(55,55,55)'})
+    .andMatchSnapshot();
+});
+
+it('should replace a color keyword with hsl() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
+    .andMatchSnapshot();
+});
+
+it('should alter a color keyword in a single property and don’t touch others', () => {
   const source = `
 div {
   color: black;
@@ -25,7 +69,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter color in a complex value', () => {
+it('should alter a color keyword in the complex values', () => {
   const source = `
 div {
   color: black;
@@ -35,61 +79,5 @@ div {
 `;
 
   return process(source, {from: 'black', to: 'red'})
-    .andMatchSnapshot();
-});
-
-it('should alter simple color in multiple properties', () => {
-  const source = `
-div {
-  color: black;
-  background: white
-}
-`;
-
-  return process(source, {from: 'black', to: 'red'})
-    .andMatchSnapshot();
-});
-
-it('should alter simple color to hex color a single property', () => {
-  const source =`
-div {
-  color: black
-}
-`;
-
-  return process(source, {from: 'black', to: '#fffeee'})
-    .andMatchSnapshot();
-});
-
-it('should alter simple color to short hex color a single property', () => {
-  const source = `
-div {
-  color: black
-}
-`;
-
-  return process(source, {from: 'black', to: '#79b'})
-    .andMatchSnapshot();
-});
-
-it('should alter simple color to rgb() function', () => {
-  const source = `
-div {
-  color: black;
-}
-`;
-
-  return process(source, {from: 'black', to: 'rgb(55,55,55)'})
-    .andMatchSnapshot();
-});
-
-it('should alter simple color to hsl() function', () => {
-  const source = `
-div {
-  color: black;
-}
-`;
-
-  return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
     .andMatchSnapshot();
 });

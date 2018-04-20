@@ -11,7 +11,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter short hex to full hex colors', () => {
+it('should replace a short hex with full hex color', () => {
   const source = `
 div {
   color: #000;
@@ -22,7 +22,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter short hex color in a complex value', () => {
+it('should replace a short hex color in a complex value', () => {
   const source = `
 div {
   color: #000;
@@ -46,7 +46,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter full hex color in a complex value', () => {
+it('should alter a full hex color in a complex value', () => {
   const source = `
 div {
   color: #000000;
@@ -69,7 +69,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter a hex color to rgb() function', () => {
+it('should replace a hex color with rgb() function', () => {
   const source = `
 div {
   color: #000;
@@ -80,7 +80,7 @@ div {
     .andMatchSnapshot();
 });
 
-it('should alter a hex color to hsl() function', () => {
+it('should replace a hex color with hsl() function', () => {
   const source = `
 div {
   color: #000;
@@ -88,5 +88,16 @@ div {
 `;
 
   return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
+    .andMatchSnapshot();
+});
+
+it('should replace a hex color with a keyword', () => {
+  const source = `
+div {
+  color: #000;
+}
+`;
+
+  return process(source, {from: 'black', to: 'red'})
     .andMatchSnapshot();
 });

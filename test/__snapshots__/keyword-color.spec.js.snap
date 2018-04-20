@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should alter color in a complex value 1`] = `
-"
-div {
-  color: red;
-  border: 1px solid white;
-  outline: 1px solid red
-}
-"
-`;
-
-exports[`should alter simple color in a single property 1`] = `
+exports[`should alter a color keyword in a single property 1`] = `
 "
 div {
   color: red
@@ -18,7 +8,7 @@ div {
 "
 `;
 
-exports[`should alter simple color in a single property and don’t touch others 1`] = `
+exports[`should alter a color keyword in a single property and don’t touch others 1`] = `
 "
 div {
   color: red;
@@ -29,16 +19,17 @@ div {
 "
 `;
 
-exports[`should alter simple color in multiple properties 1`] = `
+exports[`should alter a color keyword in the complex values 1`] = `
 "
 div {
   color: red;
-  background: white
+  border: 1px solid white;
+  outline: 1px solid red
 }
 "
 `;
 
-exports[`should alter simple color to hex color a single property 1`] = `
+exports[`should replace a color keyword with hex color 1`] = `
 "
 div {
   color: #fffeee
@@ -46,7 +37,7 @@ div {
 "
 `;
 
-exports[`should alter simple color to hsl() function 1`] = `
+exports[`should replace a color keyword with hsl() function 1`] = `
 "
 div {
   color: hsl(30,67%,17%);
@@ -54,7 +45,7 @@ div {
 "
 `;
 
-exports[`should alter simple color to rgb() function 1`] = `
+exports[`should replace a color keyword with rgb() function 1`] = `
 "
 div {
   color: rgb(55,55,55);
@@ -62,7 +53,7 @@ div {
 "
 `;
 
-exports[`should alter simple color to short hex color a single property 1`] = `
+exports[`should replace a color keyword with short hex color 1`] = `
 "
 div {
   color: #79b

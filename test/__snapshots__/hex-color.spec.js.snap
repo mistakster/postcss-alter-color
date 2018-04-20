@@ -1,22 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should alter a hex color to hsl() function 1`] = `
-"
-div {
-  color: hsl(30,67%,17%);
-}
-"
-`;
-
-exports[`should alter a hex color to rgb() function 1`] = `
-"
-div {
-  color: rgb(55,55,55);
-}
-"
-`;
-
-exports[`should alter full hex color in a complex value 1`] = `
+exports[`should alter a full hex color in a complex value 1`] = `
 "
 div {
   color: #ff3fe0;
@@ -33,7 +17,39 @@ div {
 "
 `;
 
-exports[`should alter short hex color in a complex value 1`] = `
+exports[`should alter short hex colors 1`] = `
+"
+div {
+  color: #f00;
+}
+"
+`;
+
+exports[`should replace a hex color with a keyword 1`] = `
+"
+div {
+  color: red;
+}
+"
+`;
+
+exports[`should replace a hex color with hsl() function 1`] = `
+"
+div {
+  color: hsl(30,67%,17%);
+}
+"
+`;
+
+exports[`should replace a hex color with rgb() function 1`] = `
+"
+div {
+  color: rgb(55,55,55);
+}
+"
+`;
+
+exports[`should replace a short hex color in a complex value 1`] = `
 "
 div {
   color: #f00;
@@ -43,15 +59,7 @@ div {
 "
 `;
 
-exports[`should alter short hex colors 1`] = `
-"
-div {
-  color: #f00;
-}
-"
-`;
-
-exports[`should alter short hex to full hex colors 1`] = `
+exports[`should replace a short hex with full hex color 1`] = `
 "
 div {
   color: #ff3fe0;
