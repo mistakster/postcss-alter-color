@@ -7,19 +7,50 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'rgb(255,0,0)'})
     .andMatchSnapshot();
 });
 
-it('should alter rgb color in a complex value', () => {
+it('should replace an rgb color with the keyword', () => {
   const source = `
 div {
   color: rgb(0,0,0);
-  border: 1px solid rgb(255,255,255);
-  outline: 1px solid rgb(0,0,0);
 }
 `;
 
   return process(source, {from: 'black', to: 'red'})
+    .andMatchSnapshot();
+});
+
+it('should replace an rgb color with the short hex color', () => {
+  const source = `
+div {
+  color: rgb(0,0,0);
+}
+`;
+
+  return process(source, {from: 'black', to: '#f00'})
+    .andMatchSnapshot();
+});
+
+it('should replace an rgb color with the full hex color', () => {
+  const source = `
+div {
+  color: rgb(0,0,0);
+}
+`;
+
+  return process(source, {from: 'black', to: '#ff3fe0'})
+    .andMatchSnapshot();
+});
+
+it('should replace an rgb color with the hsl color', () => {
+  const source = `
+div {
+  color: rgb(0,0,0);
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsl(0,100%,50%)'})
     .andMatchSnapshot();
 });

@@ -7,7 +7,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'hsl(0,100%,50%)'})
     .andMatchSnapshot();
 });
 
@@ -20,6 +20,6 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'hsl(0,100%,50%)'})
     .andMatchSnapshot();
 });

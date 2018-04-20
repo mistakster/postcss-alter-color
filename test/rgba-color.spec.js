@@ -7,7 +7,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'rgba(255,0,0,1)'})
     .andMatchSnapshot();
 });
 
@@ -20,7 +20,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'rgba(255,0,0,1)'})
     .andMatchSnapshot();
 });
 
@@ -33,6 +33,6 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: 'rgba(255,0,0,1)'})
     .andMatchSnapshot();
 });
