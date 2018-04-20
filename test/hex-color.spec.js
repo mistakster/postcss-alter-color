@@ -7,7 +7,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: '#f00'})
     .andMatchSnapshot();
 });
 
@@ -31,7 +31,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: '#f00'})
     .andMatchSnapshot();
 });
 
@@ -42,7 +42,7 @@ div {
 }
 `;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: '#ff3fe0'})
     .andMatchSnapshot();
 });
 
@@ -54,6 +54,39 @@ div {
   outline: 1px solid #000000;
 }`;
 
-  return process(source, {from: 'black', to: 'red'})
+  return process(source, {from: 'black', to: '#ff3fe0'})
+    .andMatchSnapshot();
+});
+
+it('should use shorter value if it’s possible', () => {
+  const source = `
+div {
+  color: #000000;
+}
+`;
+
+  return process(source, {from: 'black', to: '#ff0000'})
+    .andMatchSnapshot();
+});
+
+it('should alter a hex color to rgb() function', () => {
+  const source = `
+div {
+  color: #000;
+}
+`;
+
+  return process(source, {from: 'black', to: 'rgb(55,55,55)'})
+    .andMatchSnapshot();
+});
+
+it('should alter a hex color to hsl() function', () => {
+  const source = `
+div {
+  color: #000;
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
     .andMatchSnapshot();
 });

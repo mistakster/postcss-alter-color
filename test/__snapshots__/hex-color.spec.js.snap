@@ -1,18 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should alter a hex color to hsl() function 1`] = `
+"
+div {
+  color: hsl(30,67%,17%);
+}
+"
+`;
+
+exports[`should alter a hex color to rgb() function 1`] = `
+"
+div {
+  color: rgb(55,55,55);
+}
+"
+`;
+
 exports[`should alter full hex color in a complex value 1`] = `
 "
 div {
-  color: #ff0000;
+  color: #ff3fe0;
   border: 1px solid #ffffff;
-  outline: 1px solid #ff0000;
+  outline: 1px solid #ff3fe0;
 }"
 `;
 
 exports[`should alter full hex colors 1`] = `
 "
 div {
-  color: #ff0000;
+  color: #ff3fe0;
 }
 "
 `;
@@ -39,6 +55,14 @@ exports[`should alter short hex to full hex colors 1`] = `
 "
 div {
   color: #ff3fe0;
+}
+"
+`;
+
+exports[`should use shorter value if it’s possible 1`] = `
+"
+div {
+  color: #f00;
 }
 "
 `;

@@ -46,6 +46,22 @@ div {
 "
 `;
 
+exports[`should alter simple color to hsl() function 1`] = `
+"
+div {
+  color: hsl(30,67%,17%);
+}
+"
+`;
+
+exports[`should alter simple color to rgb() function 1`] = `
+"
+div {
+  color: rgb(55,55,55);
+}
+"
+`;
+
 exports[`should alter simple color to short hex color a single property 1`] = `
 "
 div {

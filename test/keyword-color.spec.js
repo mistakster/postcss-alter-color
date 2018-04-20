@@ -71,3 +71,25 @@ div {
   return process(source, {from: 'black', to: '#79b'})
     .andMatchSnapshot();
 });
+
+it('should alter simple color to rgb() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'rgb(55,55,55)'})
+    .andMatchSnapshot();
+});
+
+it('should alter simple color to hsl() function', () => {
+  const source = `
+div {
+  color: black;
+}
+`;
+
+  return process(source, {from: 'black', to: 'hsl(30,67%,17%)'})
+    .andMatchSnapshot();
+});
