@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should alter full hex color in a complex value 1`] = `
+"
+div {
+  color: #ff0000;
+  border: 1px solid #ffffff;
+  outline: 1px solid #ff0000;
+}"
+`;
+
+exports[`should alter full hex colors 1`] = `
+"
+div {
+  color: #ff0000;
+}
+"
+`;
+
+exports[`should alter short hex color in a complex value 1`] = `
+"
+div {
+  color: #f00;
+  border: 1px solid #fff;
+  outline: 1px solid #f00
+}
+"
+`;
+
+exports[`should alter short hex colors 1`] = `
+"
+div {
+  color: #f00;
+}
+"
+`;
+
+exports[`should alter short hex to full hex colors 1`] = `
+"
+div {
+  color: #ff3fe0;
+}
+"
+`;
