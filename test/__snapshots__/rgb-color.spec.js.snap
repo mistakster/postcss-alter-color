@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should alter rgb color in a complex value 1`] = `
+"
+div {
+  color: rgb(255,0,0);
+  border: 1px solid rgb(255,255,255);
+  outline: 1px solid rgb(255,0,0);
+}
+"
+`;
+
+exports[`should alter rgb colors 1`] = `
+"
+div {
+  color: rgb(255,0,0);
+}
+"
+`;
