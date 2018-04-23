@@ -57,7 +57,7 @@ circle {
 @media screen and (min-width: 480px) {
   body {
     color: yellow;
-    background-color: hsla(81,35%,30%,0.5);
+    background-color: rgba(85,104,50,0.5);
     border: solid #556832 1px;
   }
 }

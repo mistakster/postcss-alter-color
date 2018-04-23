@@ -11,10 +11,10 @@ div {
 exports[`should alter both rgb(), rgba(), hsl() and hsla() colors 1`] = `
 "
 div {
-  border: solid 1px rgb(255,0,0);
+  border: solid 1px red;
   color: rgba(255,0,0,0.5);
-  background-color: hsl(0,100%,50%);
-  outline: 1px solid hsla(0,100%,50%,0.9);
+  background-color: red;
+  outline: 1px solid rgba(255,0,0,0.9);
 }
 "
 `;

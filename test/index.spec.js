@@ -42,7 +42,7 @@ describe('Alter Color plugin', () => {
       .andMatchSnapshot();
   });
 
-  it.skip('should process a complex file correctly while preserving alpha channel', () => {
+  it('should process a complex file correctly while preserving alpha channel', () => {
     const options = {
       from: 'black',
       to: '#556832',

@@ -1,6 +1,6 @@
 const process = require('./utils/process');
 
-it.skip('should alter a color and leave alpha channel untouched', () => {
+it('should alter a color and leave alpha channel untouched', () => {
   const options = {from: 'black', to: 'red', preserveAlphaChannel: true};
   const source = `
 div {
@@ -24,7 +24,7 @@ div {
     .andMatchSnapshot();
 });
 
-it.skip('should alter both rgb(), rgba(), hsl() and hsla() colors', () => {
+it('should alter both rgb(), rgba(), hsl() and hsla() colors', () => {
   const options = {from: 'black', to: 'red', preserveAlphaChannel: true};
   const source = `
 div {
