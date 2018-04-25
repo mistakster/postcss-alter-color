@@ -3,19 +3,17 @@
 exports[`Alter Color plugin should process a complex file correctly 1`] = `
 "
 body {
-  color: white;
-  background: #556832;
+  background: white;
+  color: #556832;
 }
 
 #article {
-  color: #cccccc;
-  border: solid 1px rgba(0,0,0,0.4);
+  border: solid 1px rgba(47,79,79,0.4);
 }
 
 .p {
-  color: #ccc;
   border: solid 1px #556832;
-  background: rgb(0,50,0) 0 0 no-repeat;
+  background: #556832 0 0 no-repeat;
 }
 
 circle {
@@ -24,9 +22,8 @@ circle {
 
 @media screen and (min-width: 480px) {
   body {
-    color: yellow;
-    background-color: hsla(0,0%,0%,0.5);
-    border: solid #556832 1px;
+    color: hsla(180,25%,25%,0.5);
+    outline: solid #556832 1px;
   }
 }
 "
@@ -35,19 +32,17 @@ circle {
 exports[`Alter Color plugin should process a complex file correctly while preserving alpha channel 1`] = `
 "
 body {
-  color: white;
-  background: #556832;
+  background: white;
+  color: #556832;
 }
 
 #article {
-  color: #cccccc;
   border: solid 1px rgba(85,104,50,0.4);
 }
 
 .p {
-  color: #ccc;
   border: solid 1px #556832;
-  background: rgb(0,50,0) 0 0 no-repeat;
+  background: #556832 0 0 no-repeat;
 }
 
 circle {
@@ -56,9 +51,8 @@ circle {
 
 @media screen and (min-width: 480px) {
   body {
-    color: yellow;
-    background-color: rgba(85,104,50,0.5);
-    border: solid #556832 1px;
+    color: rgba(85,104,50,0.5);
+    outline: solid #556832 1px;
   }
 }
 "

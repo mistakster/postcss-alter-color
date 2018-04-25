@@ -2,30 +2,27 @@ const process = require('./utils/process');
 
 const source = `
 body {
-  color: white;
-  background: black;
+  background: white;
+  color: darkslategray;
 }
 
 #article {
-  color: #cccccc;
-  border: solid 1px rgba(0, 0, 0, 0.4);
+  border: solid 1px rgba(47, 79, 79, 0.4);
 }
 
 .p {
-  color: #ccc;
-  border: solid 1px #000;
-  background: rgb(0, 50, 0) 0 0 no-repeat;
+  border: solid 1px #2f4f4f;
+  background: rgb(47, 79, 79) 0 0 no-repeat;
 }
 
 circle {
-  fill: #000000;
+  fill: #2f4f4f;
 }
 
 @media screen and (min-width: 480px) {
   body {
-    color: yellow;
-    background-color: hsla(0, 0%, 0%, 0.5);
-    border: solid #000 1px;
+    color: hsla(180, 25%, 25%, 0.5);
+    outline: solid hsl(180, 25%, 25%) 1px;
   }
 }
 `;
@@ -33,7 +30,7 @@ circle {
 describe('Alter Color plugin', () => {
   it('should process a complex file correctly', () => {
     const options = {
-      from: 'black',
+      from: 'darkslategray',
       to: '#556832',
       preserveAlphaChannel: false
     };
@@ -44,7 +41,7 @@ describe('Alter Color plugin', () => {
 
   it('should process a complex file correctly while preserving alpha channel', () => {
     const options = {
-      from: 'black',
+      from: 'darkslategray',
       to: '#556832',
       preserveAlphaChannel: true
     };
