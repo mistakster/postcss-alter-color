@@ -17,7 +17,7 @@ const postcss = require('postcss');
 const alterColorPlugin = require('postcss-alter-color');
 
 const config = {
-  from: 'black',
+  from: 'darkslategray',
   to: '#556832'
 };
 
@@ -29,11 +29,15 @@ Input CSS:
 
 ```css
 body {
-  color: white;
-  background: black;
+  background: white;
+  color: darkslategray;
+}
+p {
+  color: #2f4f4f;
 }
 .quote {
-  border: 1px solid #000;
+  border-left: 1px solid rgb(47, 79, 79);
+  border-right: solid hsl(180, 25%, 25%) 1px;
 }
 ```
 
@@ -41,11 +45,15 @@ Output CSS:
 
 ```css
 body {
-  color: white;
-  background: #556832;
+  background: white;
+  color: #556832;
+}
+p {
+  color: #556832;
 }
 .quote {
-  border: 1px solid #556832;
+  border-left: 1px solid #556832;
+  border-right: solid #556832 1px;
 }
 ```
 
