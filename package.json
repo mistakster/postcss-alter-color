@@ -41,11 +41,11 @@
     "npm": "^3.0.0"
   },
   "dependencies": {
-    "css-tree": "^1.0.0-alpha.28",
+    "css-tree": "^1.0.0-alpha.34",
     "parse-color": "^1.0.0",
-    "postcss": "^6.0.21"
+    "postcss": "^7.0.18"
   },
   "devDependencies": {
-    "jest": "^22.4.3"
+    "jest": "^24.9.0"
   }
 }
