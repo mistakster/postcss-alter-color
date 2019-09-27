@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should process linear gradients 1`] = `
+"
+.i-work {
+  background-image: linear-gradient(180deg,rgba(0,0,0,0.5),transparent);
+}
+
+.i-dont-work {
+  background-image: linear-gradient(180deg,transparent 0,transparent);
+}
+
+.i-dont-work-either {
+  background-image: linear-gradient(90deg,lightgreen,#42d9ff 37.5%,lightgreen 75%);
+}
+
+.i-work-now {
+  background-image: linear-gradient(180deg,transparent 0,transparent 0);
+}
+
+.i-work-now-too {
+  background-image: linear-gradient(90deg,lightgreen 0,#42d9ff 37.5%,lightgreen 75%);
+}
+"
+`;
